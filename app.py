@@ -27,7 +27,14 @@ async def init_pg(app):
 
 async def startup(app):
     app.db = await init_pg(app)
-    app.websockets = []
+    conn = await app.db.acquire()
+    await conn.execute(
+        'CREATE TABLE IF NOT EXISTS subscriber_info ('
+        'id SERIAL PRIMARY KEY,'
+        'name VARCHAR(55),'
+        'age INT,'
+        'city VARCHAR(255))'
+    )
 
 
 async def shutdown(app):
