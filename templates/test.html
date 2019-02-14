@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button onclick="sendmessage()">send</button>
+    <h1>hi</h1>
+<script>
+
+    let socket = new WebSocket('ws://localhost:8000/ws')
+
+    function sendmessage() {
+        socket.send('GOOOOO')
+    }
+    socket.onmessage = function(event) {
+        console.log(event.data)
+};
+</script>
+</body>
+</html>
